@@ -1,5 +1,3 @@
-@import "../../../assets/styles/global";
-
 .menu {
     display: flex;
     flex-direction: column;
@@ -17,7 +15,6 @@
     grid-template-rows: 1fr 1fr;
     gap: 1.5rem;
     margin: 3rem 0;
-
 }
 
 .menu__select {

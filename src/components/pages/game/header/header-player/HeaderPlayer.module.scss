@@ -1,0 +1,13 @@
+.player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player__img {
+    width: 4rem;
+}
+
+.player__text {
+    font-size: 1.6rem;
+}
