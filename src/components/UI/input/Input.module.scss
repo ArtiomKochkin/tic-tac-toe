@@ -1,0 +1,25 @@
+@import "../../../assets/styles/global";
+
+.input {
+    display: block;
+    background-color: transparent;
+    border: 1px solid $blue;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0px 0px 4px 1px $blue;
+    transition: all linear 0.3s;
+
+    font-family: inherit;
+    font-size: 1.6rem;
+    color: $white;
+
+    &::placeholder {
+        font-family: inherit;
+        font-size: 1.6rem;
+        color: $blue;
+    }
+
+    &:focus {
+        box-shadow: 0px 0px 10px 3px $blue;
+    }
+}

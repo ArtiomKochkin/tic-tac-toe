@@ -1,1 +1,29 @@
 @import "../../../assets/styles/global";
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10vh 0;
+    margin: 0 auto;
+}
+
+.menu__settings {
+    margin: 3rem 0 2rem;
+}
+
+.menu__fields {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
+
+}
+
+.menu__select {
+    margin-top: 2rem;
+    
+    select {
+        width: 100%;
+    }
+}

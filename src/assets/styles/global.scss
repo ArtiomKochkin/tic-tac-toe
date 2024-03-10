@@ -1,6 +1,5 @@
 @import "reset";
 @import "vars";
-@import "mixins";
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
 
@@ -19,4 +18,46 @@ body {
     font-style: normal;
     color: $white;
     background-color: $black;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 
+        0 0 10px $white, 
+        0 0 20px $white, 
+        0 0 30px $white, 
+        0 0 40px $blue, 
+        0 0 70px $blue, 
+        0 0 80px $blue, 
+        0 0 100px $blue, 
+        0 0 150px $blue
+    ;
+    // animation: neonGlow 3s ease-in-out infinite; 
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow: 
+    0 0 10px $white, 
+    0 0 20px $white, 
+    0 0 30px $white, 
+    0 0 40px $blue, 
+    0 0 70px $blue, 
+    0 0 80px $blue, 
+    0 0 100px $blue, 
+    0 0 150px $blue; 
+  }
+  50% {
+    text-shadow: 
+    0 0 1px $white, 
+    0 0 5px $white, 
+    0 0 10px $white, 
+    0 0 20px $blue, 
+    0 0 30px $blue, 
+    0 0 40px $blue, 
+    0 0 70px $blue, 
+    0 0 80px $blue;
+  }
 }
