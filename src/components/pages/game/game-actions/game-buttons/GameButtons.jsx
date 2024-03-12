@@ -1,4 +1,5 @@
 import Button from "../../../../UI/button/Button";
+import { Link } from "react-router-dom";
 
 const GameButtons = ({ ...props }) => {
     return (
@@ -7,7 +8,7 @@ const GameButtons = ({ ...props }) => {
                 Играть снова
             </Button>
             <Button type="button">
-                Перейти в меню
+               <Link to="/">Перейти в меню</Link>
             </Button>
             
         </div>

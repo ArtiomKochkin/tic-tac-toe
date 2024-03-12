@@ -4,8 +4,8 @@ import styles from "../Menu.module.scss";
 
 const MenuSettings = ({ ...props}) => {
     const boardSizes = [
-        { value: "3x3", name: "3x3 (классический)" },
-        { value: "5x5", name: "5x5 (совместите 4 чтобы выиграть)" }
+        { value: "3", name: "3x3 (классический)" },
+        { value: "5", name: "5x5 (совместите 4 чтобы выиграть)" }
     ];
 
     const gameModes = [
