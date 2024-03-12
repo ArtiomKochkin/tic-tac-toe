@@ -1,35 +1,85 @@
-import MenuSelect from "../menu-select/MenuSelect";
-import Input from "../../../UI/input/Input";
-import styles from "../Menu.module.scss";
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MenuSelect from '../menu-select/MenuSelect';
+import Input from '../../../UI/input/Input';
+import Button from '../../../UI/button/Button';
+import styles from '../Menu.module.scss';
+import { gameModes, boardSizes } from '../data';
+import { SettingsContext } from '../../../../providers/SettingsProvider';
 
 const MenuSettings = ({ ...props}) => {
-    const boardSizes = [
-        { value: "3", name: "3x3 (классический)" },
-        { value: "5", name: "5x5 (совместите 4 чтобы выиграть)" }
-    ];
+    const {gameSettings, setGameSettings} = useContext(SettingsContext);
+    const nav = useNavigate();
 
-    const gameModes = [
-        { value: "friend", name: "Игра с другом" },
-        { value: "bot", name: "Игра против робота" }
-    ];
+    const applySettings = (event) => {
+        event.preventDefault();
+        nav("/game");
+        console.log(gameSettings);
+    }
 
     return (
-        <div {...props}>
-            <MenuSelect 
-                className={styles.menu__select} 
-                options={gameModes} 
+        <form {...props} onSubmit={applySettings}>
+            <MenuSelect
+                options={gameModes}
+                value={gameSettings.gameMode}
+                onChange={(e) => setGameSettings(prev => ({
+                    ...prev,
+                    gameMode: e.target.value
+                }))}
                 labelText="Режим игры"
             />
-            <MenuSelect 
-                className={styles.menu__select} 
+            <MenuSelect
                 options={boardSizes} 
+                value={gameSettings.boardSize}
+                onChange={(e) => setGameSettings(prev => ({
+                    ...prev,
+                    boardSize: e.target.value
+                }))}
                 labelText="Размер доски"
             />
             <div className={styles.menu__fields}>
-                <Input type="text" placeholder="Введите имя 1 игрока" />
-                <Input type="text" placeholder="Введите имя 2 игрока" />
+                {gameSettings.gameMode === "bot"
+                    ? <>
+                        <Input
+                            placeholder="Введите имя игрока"
+                            value={gameSettings.playersName.name} 
+                            onChange={e => setGameSettings(prev => ({
+                                ...prev,
+                                playersName: { 
+                                    ...gameSettings.playersName, 
+                                    name: e.target.value 
+                                }
+                            }))}
+                        />
+                    </>
+                    : <>
+                        <Input
+                            placeholder="Введите имя 1 игрока"
+                            value={gameSettings.playersName.name1} 
+                            onChange={e => setGameSettings(prev => ({
+                                ...prev,
+                                playersName: {
+                                    ...gameSettings.playersName, 
+                                    name1: e.target.value 
+                                }
+                            }))}
+                        />
+                        <Input
+                            placeholder="Введите имя 2 игрока"
+                            value={gameSettings.playersName.name2} 
+                            onChange={e => setGameSettings(prev => ({
+                                ...prev,
+                                playersName: { 
+                                    ...gameSettings.playersName, 
+                                    name2: e.target.value 
+                                }
+                            }))}
+                        />
+                    </>
+                }
             </div>
-        </div>
+            <Button>Играть</Button>
+        </form>
     )
 }
 

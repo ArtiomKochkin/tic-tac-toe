@@ -1,15 +1,12 @@
 import Button from "../../../../UI/button/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const GameButtons = ({ ...props }) => {
+    const nav = useNavigate();
     return (
         <div {...props}>
-            <Button type="button">
-                Играть снова
-            </Button>
-            <Button type="button">
-               <Link to="/">Перейти в меню</Link>
-            </Button>
+            <Button type="button"> Играть снова </Button>
+            <Button type="button" onClick={() => nav("/")}>Перейти в меню</Button>
             
         </div>
     )

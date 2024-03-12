@@ -1,13 +1,17 @@
 .menu {
+    padding: 10vh 0;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10vh 0;
-    margin: 0 auto;
 }
 
 .menu__settings {
     margin: 3rem 0 2rem;
+
+    button {
+        width: 100%;
+    }
 }
 
 .menu__fields {
