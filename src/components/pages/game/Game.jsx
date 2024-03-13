@@ -9,7 +9,7 @@ const Game = () => {
     const {gameSettings, setGameSettings} = useContext(SettingsContext);
     const [isResult, setIsResult] = useState(true);
 
-    console.log(gameSettings);
+    // console.log(gameSettings);
 
     return (
         <div className={styles.game}>

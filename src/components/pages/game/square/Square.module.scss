@@ -3,11 +3,9 @@
 .square {
     border: 1px solid $blue;
     border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0px 0px 10px 3px $blue;
+    padding: 1rem;
+    box-shadow: 0px 0px 7px 3px $blue;
     transition: all linear 0.3s;
-    width: 160px;
-    height: 160px;
     text-align: center;
     vertical-align: middle;
 
@@ -18,7 +16,7 @@
     }
 
     &.winner {
-        box-shadow: 0px 0px 10px 3px $green;
+        box-shadow: 0px 0px 7px 3px $green;
     }
 }
 
@@ -28,5 +26,9 @@
 
     &.show {    
         opacity: 1;
+    }
+
+    img {
+        width: 80px;
     }
 }
