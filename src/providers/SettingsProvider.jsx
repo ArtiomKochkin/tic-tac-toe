@@ -8,9 +8,8 @@ export const SettingsProvider = ({ children }) => {
         gameMode: gameModes[0].value, 
         boardSize: boardSizes[0].value, 
         playersName: { 
-            name: "Игрок", 
-            name1: "Игрок 1", 
-            name2: "Игрок 2" 
+            name1: "", 
+            name2: "" 
         }
     });
     return (

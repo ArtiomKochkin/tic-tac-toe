@@ -3,12 +3,16 @@ import styles from "./GameActions.module.scss";
 import GameButtons from "./game-buttons/GameButtons";
 import GameResult from "./game-result/GameResult";
 
-const GameActions = () => {
+const GameActions = ({ isResult }) => {
     return (
         <div className={styles.actions}>
-            <NextMove player="player" className={styles.actions__text}/>
-            <GameResult result={"player"} className={styles.actions__text}/>
-            <GameButtons className={styles.actions__buttons}/>
+            {isResult 
+                ? <>
+                    <GameResult result={"player"} className={styles.actions__text}/>
+                    <GameButtons className={styles.actions__buttons}/>
+                </>
+                : <NextMove player="player" className={styles.actions__text}/>
+            }
         </div>
     )
 }

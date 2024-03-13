@@ -6,15 +6,17 @@ import Button from '../../../UI/button/Button';
 import styles from '../Menu.module.scss';
 import { gameModes, boardSizes } from '../data';
 import { SettingsContext } from '../../../../providers/SettingsProvider';
+import useDefaultNames from '../../../../hooks/useDefaultNames';
 
 const MenuSettings = ({ ...props}) => {
     const {gameSettings, setGameSettings} = useContext(SettingsContext);
+    const { checkNames } = useDefaultNames();
     const nav = useNavigate();
 
     const applySettings = (event) => {
         event.preventDefault();
         nav("/game");
-        console.log(gameSettings);
+        checkNames();
     }
 
     return (
@@ -42,12 +44,12 @@ const MenuSettings = ({ ...props}) => {
                     ? <>
                         <Input
                             placeholder="Введите имя игрока"
-                            value={gameSettings.playersName.name} 
+                            value={gameSettings.playersName.name1} 
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: { 
                                     ...gameSettings.playersName, 
-                                    name: e.target.value 
+                                    name1: e.target.value 
                                 }
                             }))}
                         />
@@ -60,7 +62,7 @@ const MenuSettings = ({ ...props}) => {
                                 ...prev,
                                 playersName: {
                                     ...gameSettings.playersName, 
-                                    name1: e.target.value 
+                                    name1: e.target.value
                                 }
                             }))}
                         />
