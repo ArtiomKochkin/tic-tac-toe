@@ -1,15 +1,14 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuSelect from '../menu-select/MenuSelect';
 import Input from '../../../UI/input/Input';
 import Button from '../../../UI/button/Button';
 import styles from '../Menu.module.scss';
-import { gameModes, boardSizes } from '../data';
-import { SettingsContext } from '../../../../providers/SettingsProvider';
+import { gameModes, boardSizes } from "../../../../data/settingsGame";
 import useDefaultNames from '../../../../hooks/useDefaultNames';
+import { useSettings } from '../../../../hooks/useSettings';
 
 const MenuSettings = ({ ...props}) => {
-    const {gameSettings, setGameSettings} = useContext(SettingsContext);
+    const {gameSettings, setGameSettings} = useSettings();
     const { checkNames } = useDefaultNames();
     const nav = useNavigate();
 
@@ -48,7 +47,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: { 
-                                    ...gameSettings.playersName, 
+                                    ...prev.playersName, 
                                     name1: e.target.value 
                                 }
                             }))}
@@ -61,7 +60,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: {
-                                    ...gameSettings.playersName, 
+                                    ...prev.playersName, 
                                     name1: e.target.value
                                 }
                             }))}
@@ -72,7 +71,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: { 
-                                    ...gameSettings.playersName, 
+                                    ...prev.playersName, 
                                     name2: e.target.value 
                                 }
                             }))}

@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { SettingsContext } from "../providers/SettingsProvider";
+import { useSettings } from "./useSettings";
 
 const useDefaultNames = () => {
-    const {gameSettings, setGameSettings} = useContext(SettingsContext);
+    const {gameSettings, setGameSettings} = useSettings();
 
     const defaultNames = {
         bot: {

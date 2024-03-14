@@ -2,72 +2,51 @@ import Header from "./header/Header";
 import styles from "./Game.module.scss";
 import GameActions from "./game-actions/GameActions";
 import Board from "./board/Board";
-import { useContext, useEffect, useState } from "react";
-import { SettingsContext } from "../../../providers/SettingsProvider";
-import { calculateWinner } from "../../../utils/calculateWinner";
+import { useState } from "react";
+import { useSettings } from "../../../hooks/useSettings";
+import { useCheckGame } from "../../../hooks/useCheckGame";
 
 const Game = () => {
-    const {gameSettings} = useContext(SettingsContext);
-    const [isResult, setIsResult] = useState(false);
-    const [xIsNext, setXIsNext] = useState(true);
-    const [winner, setWinner] = useState("");
-    const [winLine, setWinLine] = useState(null);
-    const [countMove, setCountMove] = useState(1);
-    const [nextPlayer, setNextPlayer] = useState(gameSettings.playersName.name1);
-    const [board, setBoard] = useState(
-        Array(Math.pow(gameSettings.boardSize, 2)).fill(null)
-    );
+    const {gameSettings} = useSettings();
+    const initialProcessGame = {
+        board: Array(Math.pow(gameSettings.boardSize, 2)).fill(null),
+        xIsNext: true,
+        nextPlayer: gameSettings.playersName.name1,
+        winner: "",
+        winLine: null,
+        countMove: 0
+    };
+    const [processGame, setProcessGame] = useState(initialProcessGame);
     
-    useEffect(() => {
-        const checkGame = () => {
-            const winner = calculateWinner(board);
-            if (winner) {
-                setWinLine(winner[1]);
-                setIsResult(true);
-                setWinner(!xIsNext ? gameSettings.playersName.name1 : gameSettings.playersName.name2);
-
-                return;
-            } else if (countMove === Math.pow(gameSettings.boardSize, 2)) {
-                setIsResult(true);
-                setWinner("не определен (ничья)");
-            }
-        }
-        checkGame();
-    }, [board]);
+    useCheckGame(processGame, setProcessGame, gameSettings);
 
     const handleClick = (i) => {
-        const newBoard = [...board];
-        if (newBoard[i]) return;
+        const newBoard = [...processGame.board];
+        if (newBoard[i] || processGame.winLine) return;
 
-        newBoard[i] = xIsNext ? "cross" : "circle";
-        setNextPlayer(!xIsNext ? gameSettings.playersName.name1 : gameSettings.playersName.name2);
-        setBoard(newBoard);
-        setXIsNext(!xIsNext);
-        setCountMove(countMove + 1);
-    }
-    
-    
-    const resetBoard = () => {
-        setBoard(Array(Math.pow(gameSettings.boardSize, 2)).fill(null));
-        setIsResult(false);
-        setCountMove(0);
-        setWinner("");
-        setWinLine(null);
+        newBoard[i] = processGame.xIsNext ? "cross" : "circle";
+        setProcessGame(prev => ({
+            ...prev,
+            nextPlayer: !prev.xIsNext ? gameSettings.playersName.name1 : gameSettings.playersName.name2,
+            board: newBoard,
+            xIsNext: !prev.xIsNext,
+            countMove: prev.countMove + 1,
+        }));
     }
 
     return (
         <div className={styles.game}>
             <Header names={Object.values(gameSettings.playersName)}/>
             <GameActions 
-                isResult={isResult}
-                winner={winner}
-                nextPlayer={nextPlayer}
-                resetBoard={resetBoard}
+                hasResult={processGame.winLine}
+                winner={processGame.winner}
+                nextPlayer={processGame.nextPlayer}
+                resetBoard={() => setProcessGame(initialProcessGame)}
             />
             <Board 
-                board={board}
+                board={processGame.board}
                 onClick={handleClick}
-                winLine={winLine}
+                winLine={processGame.winLine}
             />
         </div>
     )
@@ -75,9 +54,10 @@ const Game = () => {
 
 export default Game;
 
-// оптимизировать код
+// добавить функционал для ведения счета 
 // адаптировать для игры 5х5
 // создать функционал и адаптацию для игры с ботом
-// можно добавить функционал для ведения счета 
+
+// проверить render ли компоненты лишний раз 
 // оптимизировать код
 // адаптивная верстка

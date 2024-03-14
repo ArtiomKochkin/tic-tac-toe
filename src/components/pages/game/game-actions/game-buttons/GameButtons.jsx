@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import Button from "../../../../UI/button/Button";
 import { useNavigate } from "react-router-dom";
-import { SettingsContext } from "../../../../../providers/SettingsProvider";
+import { useSettings } from "../../../../../hooks/useSettings";
 
 const GameButtons = ({ resetBoard, ...props}) => {
     const nav = useNavigate();
-    const {gameSettings, setGameSettings} = useContext(SettingsContext);
+    const {gameSettings, setGameSettings} = useSettings();
 
     const handleMenuButtonClick = () => {
         nav("/");
