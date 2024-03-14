@@ -1,22 +1,19 @@
 import Square from "../square/Square";
 import styles from "./Board.module.scss";
 
-const Board = ({ size }) => {
-    const squaresColumn = Array.from({ length: size });
-    const squaresRow = Array.from({ length: size });
+const Board = ({ board, onClick, winLine }) => {
 
     return (
-        <table className={styles.board}>
-            <tbody>
-                {squaresRow.map((row, i) => {
-                    return <tr key={i}>
-                        {squaresColumn.map((column, i) =>
-                            <Square key={i}/>
-                        )}
-                    </tr>
-                })}
-            </tbody>
-        </table>
+        <div className={styles.board}>
+            {board.map((square, i) =>
+                <Square 
+                    key={i} 
+                    onClick={() => onClick(i)} 
+                    value={square}
+                    isWinner={winLine && winLine.includes(i)}
+                />
+            )}
+        </div>
     )
 }
 

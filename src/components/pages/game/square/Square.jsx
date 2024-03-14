@@ -1,12 +1,17 @@
 import styles from "./Square.module.scss";
 
-const Square = () => {
+const Square = ({ onClick, value, isWinner }) => {
+    const typeMove = value;
+
     return (
-        <td className={styles.square}>
-            <div className={styles.square__choice}>
-                <img src="./img/circle.svg" alt="" />
-            </div>
-        </td>
+        <div 
+            className={`${styles.square} ${isWinner && styles.winner}`} 
+            onClick={onClick}
+        >
+            {typeMove !== null && 
+                <img src={`./img/${typeMove}.svg`} alt={typeMove} />
+            }
+        </div>
     )
 }
 

@@ -3,32 +3,28 @@
 .square {
     border: 1px solid $blue;
     border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0px 0px 7px 3px $blue;
-    transition: all linear 0.3s;
-    text-align: center;
-    vertical-align: middle;
+    box-shadow: 0px 0px 7px 2px $blue;
+    cursor: pointer;
+    margin: 1rem;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all linear 0.1s;
+
 
     &:hover {
-        .square__choice {
-            opacity: 1;
-        }
+        box-shadow: 0px 0px 10px 5px $blue;
     }
 
     &.winner {
-        box-shadow: 0px 0px 7px 3px $green;
-    }
-}
-
-.square__choice {
-    cursor: pointer;
-    opacity: 0;
-
-    &.show {    
-        opacity: 1;
+        border: 1px solid $green;
+        box-shadow: 0px 0px 10px 3px $green;
     }
 
     img {
-        width: 80px;
+        width: 60px;
+        transition: all linear 0.3s;
     }
 }

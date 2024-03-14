@@ -4,6 +4,6 @@ export const boardSizes = [
 ];
 
 export const gameModes = [
-    { value: "friend", name: "Игра с другом" },
+    { value: "friends", name: "Игра с другом" },
     { value: "bot", name: "Игра против робота" }
 ];

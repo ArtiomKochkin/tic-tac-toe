@@ -3,7 +3,7 @@ import Button from "../../../../UI/button/Button";
 import { useNavigate } from "react-router-dom";
 import { SettingsContext } from "../../../../../providers/SettingsProvider";
 
-const GameButtons = ({ ...props }) => {
+const GameButtons = ({ resetBoard, ...props}) => {
     const nav = useNavigate();
     const {gameSettings, setGameSettings} = useContext(SettingsContext);
 
@@ -19,7 +19,7 @@ const GameButtons = ({ ...props }) => {
 
     return (
         <div {...props}>
-            <Button type="button"> Играть снова </Button>
+            <Button type="button" onClick={resetBoard}> Играть снова </Button>
             <Button type="button" onClick={handleMenuButtonClick}>Перейти в меню</Button>
         </div>
     )

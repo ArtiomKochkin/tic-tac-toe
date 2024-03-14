@@ -1,7 +1,7 @@
-const GameResult = ({ result, ...props }) => {
+const GameResult = ({ winner, ...props }) => {
     return (
         <div {...props}>
-            Победитель - <span>{result}</span>
+            Победитель - <span>{winner}</span>
         </div>
     )
 }
