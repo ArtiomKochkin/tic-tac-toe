@@ -25,6 +25,10 @@ const MenuSettings = ({ ...props}) => {
                 value={gameSettings.gameMode}
                 onChange={(e) => setGameSettings(prev => ({
                     ...prev,
+                    playersName: {
+                        name1: "", 
+                        name2: "" 
+                    },
                     gameMode: e.target.value
                 }))}
                 labelText="Режим игры"
