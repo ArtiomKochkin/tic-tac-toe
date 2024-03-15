@@ -23,7 +23,7 @@ const Game = () => {
     };
     const [processGame, setProcessGame] = useState(initialProcessGame);
     
-    useCheckGame(processGame, setProcessGame, gameSettings);
+    useCheckGame(processGame, setProcessGame, gameSettings); 
 
     const handleClick = (i) => {
         const newBoard = [...processGame.board];
