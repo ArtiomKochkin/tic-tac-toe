@@ -5,5 +5,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 50%;
+    width: 300px;
+
+    &.size5 {
+        width: 500px;
+    }
 }

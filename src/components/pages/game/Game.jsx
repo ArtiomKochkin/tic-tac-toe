@@ -1,10 +1,11 @@
+import { useState } from "react";
+import { useSettings } from "../../../hooks/useSettings";
+import { useCheckGame } from "../../../hooks/useCheckGame";
 import Header from "./header/Header";
 import styles from "./Game.module.scss";
 import GameActions from "./game-actions/GameActions";
 import Board from "./board/Board";
-import { useState } from "react";
-import { useSettings } from "../../../hooks/useSettings";
-import { useCheckGame } from "../../../hooks/useCheckGame";
+
 
 const Game = () => {
     const {gameSettings} = useSettings();
@@ -14,7 +15,11 @@ const Game = () => {
         nextPlayer: gameSettings.playersName.name1,
         winner: "",
         winLine: null,
-        countMove: 0
+        countMove: 0,
+        score: {
+            left: 0,
+            right: 0
+        }
     };
     const [processGame, setProcessGame] = useState(initialProcessGame);
     
@@ -34,14 +39,24 @@ const Game = () => {
         }));
     }
 
+    const resetBoard = () => {
+        setProcessGame(prev => ({
+            ...initialProcessGame,
+            score: { ...prev.score }
+        }));
+    }
+
     return (
         <div className={styles.game}>
-            <Header names={Object.values(gameSettings.playersName)}/>
+            <Header 
+                names={Object.values(gameSettings.playersName)}
+                score={processGame.score}
+            />
             <GameActions 
                 hasResult={processGame.winLine}
                 winner={processGame.winner}
                 nextPlayer={processGame.nextPlayer}
-                resetBoard={() => setProcessGame(initialProcessGame)}
+                resetBoard={resetBoard}
             />
             <Board 
                 board={processGame.board}
@@ -54,7 +69,6 @@ const Game = () => {
 
 export default Game;
 
-// добавить функционал для ведения счета 
 // адаптировать для игры 5х5
 // создать функционал и адаптацию для игры с ботом
 
