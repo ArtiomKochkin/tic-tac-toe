@@ -4,19 +4,22 @@ import { calculateWinner3x3, calculateWinner5x5 } from "../utils/calculateWinner
 export const useCheckGame = (processGame, setProcessGame, gameSettings) => {
     useEffect(() => {
         const checkGame = () => {
-            const winner = gameSettings.boardSize === "3" 
+            if (!processGame.winLine) {
+                const winner = gameSettings.boardSize === "3" 
                 ? calculateWinner3x3(processGame.board) 
                 : calculateWinner5x5(processGame.board)
             ;
-            
+
             if (winner) {
+                const winPlayer = winner[0] === "cross" ? gameSettings.playersName.name1 : gameSettings.playersName.name2;
+                const isWinFirstPlayer = winPlayer === gameSettings.playersName.name1;
                 setProcessGame(prev => ({
                     ...prev,
                     winLine: winner[1],
-                    winner: !prev.xIsNext ? gameSettings.playersName.name1 : gameSettings.playersName.name2,
+                    winner: winPlayer,
                     score: {
-                        left: !prev.xIsNext ? prev.score.left + 1 : prev.score.left,
-                        right: prev.xIsNext ? prev.score.right + 1 : prev.score.right
+                        ...prev.score,
+                        [isWinFirstPlayer ? "left" : "right"]: prev.score[isWinFirstPlayer ? "left" : "right"] + 1
                     }
                 }));
                 return;
@@ -27,7 +30,8 @@ export const useCheckGame = (processGame, setProcessGame, gameSettings) => {
                     winner: "не определен (ничья)",
                 }));
             }
+            }
         }
         checkGame();
-    }, [processGame.board, processGame.countMove, gameSettings.boardSize, gameSettings.playersName, setProcessGame]);
+    }, [processGame.board, processGame.winLine, processGame.countMove, gameSettings.boardSize, gameSettings.playersName, setProcessGame]);
 }

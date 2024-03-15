@@ -5,6 +5,7 @@ import Header from "./header/Header";
 import styles from "./Game.module.scss";
 import GameActions from "./game-actions/GameActions";
 import Board from "./board/Board";
+import { useBot } from "../../../hooks/useBot";
 
 
 const Game = () => {
@@ -23,8 +24,6 @@ const Game = () => {
     };
     const [processGame, setProcessGame] = useState(initialProcessGame);
     
-    useCheckGame(processGame, setProcessGame, gameSettings); 
-
     const handleClick = (i) => {
         const newBoard = [...processGame.board];
         if (newBoard[i] || processGame.winLine) return;
@@ -45,6 +44,9 @@ const Game = () => {
             score: { ...prev.score }
         }));
     }
+
+    useCheckGame(processGame, setProcessGame, gameSettings); 
+    useBot(processGame, setProcessGame, gameSettings);
 
     return (
         <div className={styles.game}>
@@ -73,4 +75,3 @@ export default Game;
 
 // проверить render ли компоненты лишний раз 
 // оптимизировать код
-// адаптивная верстка
