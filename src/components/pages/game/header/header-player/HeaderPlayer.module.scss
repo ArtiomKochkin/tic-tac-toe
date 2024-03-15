@@ -1,3 +1,6 @@
+@import "../../../../../assets/styles/vars";
+@import "../../../../../assets/styles/mixins";
+
 .player {
     display: flex;
     justify-content: space-between;
@@ -6,8 +9,15 @@
 
 .player__img {
     width: 4rem;
+
+    @include breakpoint($mobile) {
+        width: 3.5rem;
+    }
 }
 
 .player__text {
     font-size: 1.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

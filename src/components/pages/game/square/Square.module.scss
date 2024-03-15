@@ -1,4 +1,5 @@
 @import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/mixins";
 
 .square {
     border: 1px solid $blue;
@@ -26,5 +27,24 @@
     img {
         width: 60px;
         transition: all linear 0.3s;
+    }
+
+    @include breakpoint($mobile) {
+        width: 42px;
+        height: 42px;
+        margin: 0.55rem;
+        box-shadow: 0px 0px 3px 1px $blue;
+
+        &:hover {
+            box-shadow: 0px 0px 3px 1px $blue;
+        }
+    
+        &.winner {
+            box-shadow: 0px 0px 3px 1px $green;
+        }
+
+        img {
+            width: 32px;
+        }
     }
 }

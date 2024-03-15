@@ -1,6 +1,13 @@
 import styles from "./HeaderPlayer.module.scss";
 
 const HeaderPlayer = ({ player, names }) => {
+
+    // if (window.innerWidth < 400) {
+    //     names = names.map(name => 
+    //         name.length > 8  ? name.slice(0, 8) + "..." : name   
+    //     )
+    // }
+
     return (
         <div className={styles.player}>
             {player === "x"

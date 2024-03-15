@@ -5,7 +5,7 @@ const Menu = () => {
 
     return (
         <div className={styles.menu}>
-            <h1>Tic-tac-toe</h1>
+            <h1>Крестики-нолики</h1>
             <MenuSettings className={styles.menu__settings} />
         </div>
     )

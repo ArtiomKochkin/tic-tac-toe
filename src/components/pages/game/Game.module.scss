@@ -1,7 +1,14 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/mixins";
+
 .game {
     margin: 0 auto;
     width: 100%;
     max-width: 90vw;
     padding: 0 1.5rem;
     height: 100vh;
+
+    @include breakpoint($mobile) {
+        max-width: 95vw;
+    }
 }
