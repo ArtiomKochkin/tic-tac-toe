@@ -1,8 +1,8 @@
-# React + Vite
+# Крестики-нолики
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Проект представляет собой игру крестики-нолики с выбором настроек, созданную в учебных целях для улучшения навыков работы с React. 
 
-Currently, two official plugins are available:
+## Установка
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm run start` - для запуска проекта в режиме разработки
+- `npm run build` -  для запуска проекта в режиме production
