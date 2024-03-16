@@ -1,8 +1,7 @@
-import styles from "./Menu.module.scss";
 import MenuSettings from "./menu-settings/MenuSettings";
+import styles from "./Menu.module.scss";
 
 const Menu = () => {
-
     return (
         <div className={styles.menu}>
             <h1>Крестики-нолики</h1>

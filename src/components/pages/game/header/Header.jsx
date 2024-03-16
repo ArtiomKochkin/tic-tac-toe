@@ -1,6 +1,6 @@
-import styles from "./Header.module.scss";
 import HeaderPlayer from "./header-player/HeaderPlayer";
 import Score from "./score/Score";
+import styles from "./Header.module.scss";
 
 const Header = ({ names, score }) => {
     return (

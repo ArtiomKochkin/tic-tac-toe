@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from "./pages/menu/Menu";
 import Game from "./pages/game/Game";
 
-
 const Router = () => {
     return (
         <BrowserRouter>

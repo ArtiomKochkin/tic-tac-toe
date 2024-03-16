@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import useDefaultNames from '../../../../hooks/useDefaultNames';
+import { useSettings } from '../../../../hooks/useSettings';
+import { gameModes, boardSizes } from "../../../../data/settingsGame";
 import MenuSelect from '../menu-select/MenuSelect';
 import Input from '../../../UI/input/Input';
 import Button from '../../../UI/button/Button';
 import styles from '../Menu.module.scss';
-import { gameModes, boardSizes } from "../../../../data/settingsGame";
-import useDefaultNames from '../../../../hooks/useDefaultNames';
-import { useSettings } from '../../../../hooks/useSettings';
 
 const MenuSettings = ({ ...props}) => {
     const {gameSettings, setGameSettings} = useSettings();
@@ -21,26 +21,26 @@ const MenuSettings = ({ ...props}) => {
     return (
         <form {...props} onSubmit={applySettings}>
             <MenuSelect
+                labelText="Режим игры"
                 options={gameModes}
                 value={gameSettings.gameMode}
                 onChange={(e) => setGameSettings(prev => ({
                     ...prev,
+                    gameMode: e.target.value,
                     playersName: {
                         name1: "", 
                         name2: "" 
                     },
-                    gameMode: e.target.value
                 }))}
-                labelText="Режим игры"
             />
             <MenuSelect
+                labelText="Размер доски"
                 options={boardSizes} 
                 value={gameSettings.boardSize}
                 onChange={(e) => setGameSettings(prev => ({
                     ...prev,
                     boardSize: e.target.value
                 }))}
-                labelText="Размер доски"
             />
             <div className={styles.menu__fields}>
                 {gameSettings.gameMode === "bot"
@@ -51,8 +51,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: { 
-                                    ...prev.playersName, 
-                                    name1: e.target.value 
+                                    ...prev.playersName, name1: e.target.value 
                                 }
                             }))}
                         />
@@ -64,8 +63,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: {
-                                    ...prev.playersName, 
-                                    name1: e.target.value
+                                    ...prev.playersName, name1: e.target.value
                                 }
                             }))}
                         />
@@ -75,8 +73,7 @@ const MenuSettings = ({ ...props}) => {
                             onChange={e => setGameSettings(prev => ({
                                 ...prev,
                                 playersName: { 
-                                    ...prev.playersName, 
-                                    name2: e.target.value 
+                                    ...prev.playersName, name2: e.target.value 
                                 }
                             }))}
                         />

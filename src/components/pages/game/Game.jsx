@@ -1,33 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useProcessGameData } from "../../../hooks/useProcessGameData";
 import { useSettings } from "../../../hooks/useSettings";
-import { useCheckGame } from "../../../hooks/useCheckGame";
-import Header from "./header/Header";
-import styles from "./Game.module.scss";
+import { makeBotMove } from "../../../utils/makeBotMove";
+import { checkResult } from "../../../utils/checkResult";
 import GameActions from "./game-actions/GameActions";
+import Header from "./header/Header";
 import Board from "./board/Board";
-import { useBot } from "../../../hooks/useBot";
-
+import styles from "./Game.module.scss";
 
 const Game = () => {
-    const {gameSettings} = useSettings();
-    const initialProcessGame = {
-        board: Array(Math.pow(gameSettings.boardSize, 2)).fill(null),
-        xIsNext: true,
-        nextPlayer: gameSettings.playersName.name1,
-        winner: "",
-        winLine: null,
-        countMove: 0,
-        score: {
-            left: 0,
-            right: 0
-        }
-    };
+    const { gameSettings } = useSettings();
+    const initialProcessGame = useProcessGameData();
     const [processGame, setProcessGame] = useState(initialProcessGame);
     
     const handleClick = (i) => {
         const newBoard = [...processGame.board];
-        if (newBoard[i] || processGame.winLine) return;
 
+        if (newBoard[i] || processGame.winLine) return;
         newBoard[i] = processGame.xIsNext ? "cross" : "circle";
         setProcessGame(prev => ({
             ...prev,
@@ -38,15 +27,12 @@ const Game = () => {
         }));
     }
 
-    const resetBoard = () => {
-        setProcessGame(prev => ({
-            ...initialProcessGame,
-            score: { ...prev.score }
-        }));
-    }
-
-    useCheckGame(processGame, setProcessGame, gameSettings); 
-    useBot(processGame, setProcessGame, gameSettings);
+    useEffect(() => {
+        checkResult(processGame, setProcessGame, gameSettings);
+        if (gameSettings.gameMode === "bot" && !processGame.xIsNext && !processGame.winLine) {
+            makeBotMove(processGame.board, processGame.xIsNext, gameSettings, setProcessGame);
+        }
+    }, [processGame, gameSettings]);
 
     return (
         <div className={styles.game}>
@@ -58,7 +44,7 @@ const Game = () => {
                 hasResult={processGame.winLine}
                 winner={processGame.winner}
                 nextPlayer={processGame.nextPlayer}
-                resetBoard={resetBoard}
+                setProcessGame={setProcessGame}
             />
             <Board 
                 board={processGame.board}
@@ -70,6 +56,3 @@ const Game = () => {
 }
 
 export default Game;
-
-// проверить render ли компоненты лишний раз 
-// оптимизировать код
