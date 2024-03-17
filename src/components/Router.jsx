@@ -4,7 +4,7 @@ import Game from "./pages/game/Game";
 
 const Router = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Routes>
                 <Route path="/" element={<Menu/>} />
                 <Route path="/game" element={<Game/>} />
