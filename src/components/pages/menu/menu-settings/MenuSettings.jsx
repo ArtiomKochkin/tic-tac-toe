@@ -18,15 +18,19 @@ const MenuSettings = ({ ...props}) => {
         checkNames();
     }
 
+    const getSelectValue = (options, currentOption) => {
+        return currentOption ? options.find(opt => opt.value === currentOption) : "";
+    }
+
     return (
         <form {...props} onSubmit={applySettings}>
             <MenuSelect
                 labelText="Режим игры"
                 options={gameModes}
-                value={gameSettings.gameMode}
-                onChange={(e) => setGameSettings(prev => ({
+                value={getSelectValue(gameModes, gameSettings.gameMode.value)}
+                onChange={(newValue) => setGameSettings(prev => ({
                     ...prev,
-                    gameMode: e.target.value,
+                    gameMode: newValue,
                     playersName: {
                         name1: "", 
                         name2: "" 
@@ -36,14 +40,14 @@ const MenuSettings = ({ ...props}) => {
             <MenuSelect
                 labelText="Размер доски"
                 options={boardSizes} 
-                value={gameSettings.boardSize}
-                onChange={(e) => setGameSettings(prev => ({
+                value={getSelectValue(boardSizes, gameSettings.boardSize.value)}
+                onChange={(newValue) => setGameSettings(prev => ({
                     ...prev,
-                    boardSize: e.target.value
+                    boardSize: newValue
                 }))}
             />
             <div className={styles.menu__fields}>
-                {gameSettings.gameMode === "bot"
+                {gameSettings.gameMode.value === "bot"
                     ? <>
                         <Input
                             placeholder="Введите имя игрока"

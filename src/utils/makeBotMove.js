@@ -2,7 +2,7 @@ import { minimax } from "./minimax";
 
 export const makeBotMove = (board, xIsNext, gameSettings, setProcessGame) => {
     const newBoard = [...board];
-    const botMove = minimax(newBoard, 0, false, gameSettings.boardSize);
+    const botMove = minimax(newBoard, 0, false, gameSettings.boardSize.value);
     
     newBoard[botMove.index] = xIsNext ? "cross" : "circle";
     setProcessGame(prev => ({

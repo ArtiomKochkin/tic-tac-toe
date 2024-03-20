@@ -1,18 +1,25 @@
 @import "../../../assets/styles/vars";
+@import "../../../assets/styles/mixins";
+
 
 .menu {
     padding: 10vh 1.5rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .menu__settings {
-    margin: 3rem 0 2rem;
+    margin: 5rem auto 2rem;
+    width: 30vw;
 
     button {
         width: 100%;
+    }
+
+    @include breakpoint($tablet) {
+        width: 40vw;
+    }
+
+    @include breakpoint($mobile) {
+        width: 80vw;
     }
 }
 

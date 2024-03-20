@@ -29,7 +29,7 @@ const Game = () => {
 
     useEffect(() => {
         checkResult(processGame, setProcessGame, gameSettings);
-        if (gameSettings.gameMode === "bot" && !processGame.xIsNext && !processGame.winLine) {
+        if (gameSettings.gameMode.value === "bot" && !processGame.xIsNext && !processGame.winLine) {
             makeBotMove(processGame.board, processGame.xIsNext, gameSettings, setProcessGame);
         }
     }, [processGame, gameSettings]);

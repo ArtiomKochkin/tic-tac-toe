@@ -1,12 +1,13 @@
-import styles from "./Select.module.scss";
+import SelectElement from "react-select";
+import "./Select.module.scss";
 
-const Select = ({ options, ...props }) => {
+const Select = ({ ...props }) => {
     return (
-        <select className={styles.select} {...props}>
-            {options.map(option => 
-                <option key={option.value} value={option.value}>{option.name}</option>
-            )}
-        </select>
+        <SelectElement
+            classNamePrefix="custom__select"
+            isSearchable={false}
+            { ...props }    
+        />
     )
 }
 

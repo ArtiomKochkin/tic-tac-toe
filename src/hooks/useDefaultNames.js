@@ -15,7 +15,7 @@ const useDefaultNames = () => {
     };
 
     const checkNames = () => {
-        const mode = gameSettings.gameMode;
+        const mode = gameSettings.gameMode.value;
         const namesToUpdate = {};
 
         for (let key in defaultNames[mode]) {
