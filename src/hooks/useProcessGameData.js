@@ -3,7 +3,7 @@ import { useSettings } from "./useSettings";
 export const useProcessGameData = () => {
     const { gameSettings } = useSettings();
     const initialProcessGame = {
-        board: Array(Math.pow(gameSettings.boardSize.value, 2)).fill(null),
+        board: Array(Math.pow(gameSettings.boardSize, 2)).fill(null),
         xIsNext: true,
         nextPlayer: gameSettings.playersName.name1,
         winner: "",

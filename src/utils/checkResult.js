@@ -2,7 +2,7 @@ import { calculateWinner3x3, calculateWinner5x5 } from "./calculateWinner";
 
 export const checkResult = (processGame, setProcessGame, gameSettings) => {
     if (!processGame.winLine) {
-        const winner = gameSettings.boardSize.value === "3" 
+        const winner = gameSettings.boardSize === "3" 
             ? calculateWinner3x3(processGame.board) 
             : calculateWinner5x5(processGame.board)
         ;
@@ -21,7 +21,7 @@ export const checkResult = (processGame, setProcessGame, gameSettings) => {
                 }
             }));
             return;
-        } else if (processGame.countMove === Math.pow(gameSettings.boardSize.value, 2)) {
+        } else if (processGame.countMove === Math.pow(gameSettings.boardSize, 2)) {
             setProcessGame(prev => ({
                 ...prev,
                 winLine: [],

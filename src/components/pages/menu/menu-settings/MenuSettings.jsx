@@ -27,10 +27,11 @@ const MenuSettings = ({ ...props}) => {
             <MenuSelect
                 labelText="Режим игры"
                 options={gameModes}
-                value={getSelectValue(gameModes, gameSettings.gameMode.value)}
+                value={getSelectValue(gameModes, gameSettings.gameMode)}
+                placeholder="Выберите режим игры"
                 onChange={(newValue) => setGameSettings(prev => ({
                     ...prev,
-                    gameMode: newValue,
+                    gameMode: newValue.value,
                     playersName: {
                         name1: "", 
                         name2: "" 
@@ -40,14 +41,15 @@ const MenuSettings = ({ ...props}) => {
             <MenuSelect
                 labelText="Размер доски"
                 options={boardSizes} 
-                value={getSelectValue(boardSizes, gameSettings.boardSize.value)}
+                value={getSelectValue(boardSizes, gameSettings.boardSize)}
+                placeholder="Выберите размер доски"
                 onChange={(newValue) => setGameSettings(prev => ({
                     ...prev,
-                    boardSize: newValue
+                    boardSize: newValue.value
                 }))}
             />
             <div className={styles.menu__fields}>
-                {gameSettings.gameMode.value === "bot"
+                {gameSettings.gameMode === "bot"
                     ? <>
                         <Input
                             placeholder="Введите имя игрока"
